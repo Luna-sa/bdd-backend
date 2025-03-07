@@ -1,10 +1,13 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Разрешает запросы с любого домена
 
-@app.route('/')
+@app.route("/", methods=["GET"])
 def home():
     return "Backend is working!"
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    return jsonify({"message": "File received!"})
